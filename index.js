@@ -1,6 +1,6 @@
 var data = {},
-    reObfuscatedUser = /(\w+)\:(\*+)/,
-    reObfuscatedVariable = /\*{2}(\w+)\*{2}/;
+    reObfuscatedUser = /([\w\-]+)\:(\*+)/,
+    reObfuscatedVariable = /\*{2}([\w\-]+)\*{2}/;
 
 function clarity() {
     
