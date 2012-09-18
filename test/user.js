@@ -12,7 +12,7 @@ describe('username replacement tests', function() {
     
     it('should be able to prime clarity with username / password keys', function() {
         clarity.use({
-            TEST_PASS: 'test'
+            test_pass: 'test'
         });
     })
     

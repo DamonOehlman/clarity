@@ -25,11 +25,11 @@ clarity.decode = function(input) {
         parts = [];
         
     // if we are dealing with a variable, then decode appropriately
-    // for users, we will be looking for the key %USERNAME%_PASS (yes, uppercase)
+    // for users, we will be looking for the key %username%_pass (yes, lowercase)
     if (matchUser) {
         // initialise the parts of the response
         parts[0] = input.slice(0, matchUser.index);
-        parts[1] = matchUser[1] + ':' + (data[(matchUser[1] + '_PASS').toUpperCase()] || matchUser[2]);
+        parts[1] = matchUser[1] + ':' + (data[(matchUser[1] + '_pass').toLowerCase()] || matchUser[2]);
         parts[2] = input.slice(matchUser.index + matchUser[0].length);
         
         // create the output

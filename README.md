@@ -18,3 +18,5 @@ var clarity = require('clarity').use(process.env),
     targetUrl = http://test:*****@damonoehlman.iriscouch.com/clarity-tests',
     db = require('nano')(clarity.decode(targetUrl));
 ```
+
+In the case above, clarity will be looking for a key of `test_pass` within the configured stores.
