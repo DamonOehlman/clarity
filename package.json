@@ -1,0 +1,32 @@
+{
+  "name": "clarity",
+  "description": "Simple utility to convert obfuscated strings (primary use case is password urls) into the actual equivalent",
+  "author": "Damon Oehlman <damon.oehlman@sidelab.com>",
+  "tags": [
+    "password",
+    "obfuscate",
+    "security"
+  ],
+  "version": "0.0.0",
+  "engines": {
+    "node": ">= 0.6.x < 0.9.0"
+  },
+  "dependencies": {
+    "debug": "*"
+  },
+  "devDependencies": {
+    "mocha": "1.4.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DamonOehlman/clarity.git"
+  },
+  "bugs": {
+    "url": "http://github.com/DamonOehlman/clarity/issues"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "contributors": [],
+  "optionalDependencies": {}
+}
