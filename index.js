@@ -3,7 +3,6 @@ var data = {},
     reObfuscatedVariable = /\*{2}([\w\-]+)\*{2}/;
 
 function clarity() {
-    
 }
 
 /**
@@ -33,6 +32,13 @@ clarity.decode = function(input) {
         parts[2] = input.slice(matchUser.index + matchUser[0].length);
         
         // create the output
+        output = parts.join('');
+    }
+    else if (matchVariable) {
+        parts[0] = input.slice(0, matchVariable.index);
+        parts[1] = data[matchVariable[1]];
+        parts[2] = input.slice(matchVariable.index + matchVariable[0].length);
+        
         output = parts.join('');
     }
     
