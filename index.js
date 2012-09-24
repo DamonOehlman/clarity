@@ -17,11 +17,18 @@ clarity.clear = function() {
 }
 
 clarity.decode = function(input) {
+    var matchUser, matchVariable, output, parts;
+
+    // if the input is an object, then walk through the object and clone
+    if (typeof input == 'object' && (! (input instanceof String))) {
+        return clarity.deepDecode(input);
+    }
+    
     // run some regex checks against the input string
-    var matchUser = reObfuscatedUser.exec(input),
-        matchVariable = reObfuscatedVariable.exec(input),
-        output = input,
-        parts = [];
+    matchUser = reObfuscatedUser.exec(input);
+    matchVariable = reObfuscatedVariable.exec(input);
+    output = input;
+    parts = [];
         
     // if we are dealing with a variable, then decode appropriately
     // for users, we will be looking for the key %username%_pass (yes, lowercase)
@@ -44,6 +51,25 @@ clarity.decode = function(input) {
     
     return output;
 };
+
+clarity.deepDecode = function(input) {
+    var clone = {};
+    
+    // if we have a string, then short circuit
+    if (typeof input == 'string' || (input instanceof String)) {
+        return clarity.decode(input);
+    }
+    
+    // iterate through the keys within the object
+    // and return the decoded value
+    Object.keys(input).forEach(function(key) {
+        if (input.hasOwnProperty(key)) {
+            clone[key] = clarity.deepDecode(input[key]);
+        }
+    });
+    
+    return clone;
+}
 
 clarity.use = function() {
     function extend() {
