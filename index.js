@@ -1,6 +1,7 @@
 var data = {},
     reObfuscatedUser = /([\w\-]+)\:(\*+)/,
-    reObfuscatedVariable = /\*{2}([\w\-]+)\*{2}/;
+    reObfuscatedVariable = /\*{2}([\w\-]+)\*{2}/,
+    hasOwn = Object.prototype.hasOwnProperty;
 
 function clarity() {
 }
@@ -14,7 +15,7 @@ clarity.clear = function() {
     data = {};
     
     return clarity;
-}
+};
 
 clarity.decode = function(input) {
     var matchUser, matchVariable, output, parts;
@@ -69,27 +70,27 @@ clarity.deepDecode = function(input) {
     });
     
     return clone;
-}
+};
 
 clarity.use = function() {
     function extend() {
         var dest = {},
             sources = Array.prototype.slice.call(arguments),
             source = sources.shift();
-            
+
         while (source) {
             Object.keys(source).forEach(function(key) {
-                if (source.hasOwnProperty(key)) {
+                if (hasOwn.call(source, key)) {
                     dest[key] = source[key];
                 }
             });
-    
+
             source = sources.shift();
         }
 
         return dest;
     }
-    
+
     // update the current data with the supplied sources
     data = extend.apply(null, [data].concat(Array.prototype.slice.call(arguments)));
     
