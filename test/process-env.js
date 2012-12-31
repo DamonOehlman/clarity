@@ -17,6 +17,12 @@ describe('object value replacement - shallow', function() {
       assert.notEqual(data.username, '**USER**');
     });
 
+    it('should be able to replace an environment var with underscores', function() {
+      var data = clarity.decode({ sshAgentPID: '**SSH_AGENT_PID**' });
+
+      assert.notEqual(data.sshAgentPID, '**SSH_AGENT_PID**');
+    });
+
     it('should be able to replace an environment var deep within an object', function() {
       var data = clarity.decode({
         config: {
