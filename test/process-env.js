@@ -10,4 +10,20 @@ describe('object value replacement - shallow', function() {
     it('should be able to replace an common environment variable (USER)', function() {
       assert.notEqual(clarity.decode('**USER**'), '**USER**');
     });
+
+    it('should be able to replace an environment var within an object', function() {
+      var data = clarity.decode({ username: '**USER** '});
+
+      assert.notEqual(data.username, '**USER**');
+    });
+
+    it('should be able to replace an environment var deep within an object', function() {
+      var data = clarity.decode({
+        config: {
+          username: '**USER**'
+        }
+      });
+
+      assert.notEqual(data.config.username, '**USER**');
+    });
 });

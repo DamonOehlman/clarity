@@ -64,7 +64,7 @@ clarity.deepDecode = function(input) {
     // iterate through the keys within the object
     // and return the decoded value
     Object.keys(input).forEach(function(key) {
-        if (input.hasOwnProperty(key)) {
+        if (hasOwn.call(input, key)) {
             clone[key] = clarity.deepDecode(input[key]);
         }
     });
