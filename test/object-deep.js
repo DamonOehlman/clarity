@@ -16,7 +16,8 @@ describe('object value replacement - deep', function() {
         name: '**test**',
         address: {
           street: '12 **this-is-a-test-key** Street',
-          suburb: 'Brisbane'
+          suburb: 'Brisbane',
+          postcode: 4054
         }
       };
       
@@ -24,7 +25,8 @@ describe('object value replacement - deep', function() {
         name: 'test',
         address: {
           street: '12 test Street',
-          suburb: 'Brisbane'
+          suburb: 'Brisbane',
+          postcode: 4054
         }
       });
     });

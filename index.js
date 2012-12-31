@@ -60,6 +60,11 @@ clarity.deepDecode = function(input) {
     if (typeof input == 'string' || (input instanceof String)) {
         return clarity.decode(input);
     }
+    // likewise if we have a type other than an object
+    // then simple return the input
+    else if (typeof input != 'object') {
+        return input;
+    }
     
     // iterate through the keys within the object
     // and return the decoded value
