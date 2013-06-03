@@ -65,6 +65,16 @@ clarity.deepDecode = function(input) {
         return input;
     }
     
+    // If input is an array. Then return an array with it's elements deep copied.
+    if (input instanceof Array) {
+        var copyArray = [];
+        input.forEach(function(item) {
+            copyArray.push(clarity.deepDecode(item));
+        });
+
+        return copyArray;
+    }
+
     // iterate through the keys within the object
     // and return the decoded value
     Object.keys(input).forEach(function(key) {
