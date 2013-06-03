@@ -1,6 +1,6 @@
 var data = {},
     reObfuscatedUser = /([\w\-]+)\:(\*+)/,
-    reObfuscatedVariable = /\*{2}([\w\-]+)(\|.*)?\*{2}/,
+    reObfuscatedVariable = /\*{2}([\w\-\.]+)(\|.*)?\*{2}/,
     hasOwn = Object.prototype.hasOwnProperty;
 
 function clarity() {
@@ -44,7 +44,27 @@ clarity.decode = function(input) {
     }
     else if (matchVariable) {
         parts[0] = input.slice(0, matchVariable.index);
-        parts[1] = data[matchVariable[1]] || matchVariable[2] && matchVariable[2].slice(1);
+
+        function transverse(data, depth) {
+            if (depth.length === 1) {
+                return data[depth.shift()] || ''
+            }
+
+            var block = data[depth.shift()];
+            if (!block || typeof block !== 'object') {
+                return '';
+            }
+            
+            return transverse(block, depth);
+        }
+
+        if (matchVariable[1]) {
+            var replacement = data[matchVariable[1]] || transverse(data, matchVariable[1].split('.'));
+        }
+        
+        // If there is no replacement data use the default
+        parts[1] = replacement || matchVariable[2] && matchVariable[2].slice(1);
+
         parts[2] = input.slice(matchVariable.index + matchVariable[0].length);
         output = parts.join('');
     }
