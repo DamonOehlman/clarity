@@ -4,13 +4,13 @@ var assert = require('assert'),
       name: 'test'
     };
 
-describe('default value usage', function() {
+describe('data integrity', function() {
     before(function() {
       clarity.clear();
       clarity.use(testData);
     });
 
-    it('should be able to replace a simple key', function() {
+    it('should preserve arrays', function() {
       var input = {
         name: '**name**',
         animals: [
