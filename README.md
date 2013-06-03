@@ -55,3 +55,16 @@ To make life easier in development, you can use the default value functionality 
 	"dbpass":   "**DB_PASS|teapot**"
 }
 ```
+
+## Replacing values from nested data
+
+It is possible to access nested data values using a period to traverse the data structure. Such as:
+
+```
+{
+	"dbserver": "**database.host**",
+	"dbport":   "**database.port**",
+	"dbuser":   "**database.user**",
+	"dbpass":   "**database.password**"
+}
+```
