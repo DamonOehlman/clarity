@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    clarity = require('..'),
+    Clarity = require('..'),
+    clarity,
     testData = {
       'profile': {
         'address': {
@@ -10,8 +11,8 @@ var assert = require('assert'),
 
 describe('object value replacement - nested data', function() {
     before(function() {
-      clarity.clear();
-      clarity.use(testData);
+        clarity = new Clarity();
+        clarity.use(testData);
     });
 
     it('should be able to replace a key from a nested data source', function() {

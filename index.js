@@ -1,9 +1,9 @@
-var data = {},
-    reObfuscatedUser = /([\w\-]+)\:(\*+)/,
+var reObfuscatedUser = /([\w\-]+)\:(\*+)/,
     reObfuscatedVariable = /\*{2}([\w\-\.]+)(\|.*)?\*{2}/,
     hasOwn = Object.prototype.hasOwnProperty;
 
-function clarity() {
+function Clarity() {
+    this.data = {}
 }
 
 /**
@@ -11,18 +11,18 @@ function clarity() {
 
 Clear the data currently stored within the clarity store
 */
-clarity.clear = function() {
-    data = {};
+Clarity.prototype.clear = function() {
+    this.data = {};
     
-    return clarity;
+    return this;
 };
 
-clarity.decode = function(input) {
+Clarity.prototype.decode = function(input) {
     var matchUser, matchVariable, output, parts;
 
     // if the input is an object, then walk through the object and clone
     if (typeof input == 'object' && (! (input instanceof String))) {
-        return clarity.deepDecode(input);
+        return this.deepDecode(input);
     }
     
     // run some regex checks against the input string
@@ -36,7 +36,7 @@ clarity.decode = function(input) {
     if (matchUser) {
         // initialise the parts of the response
         parts[0] = input.slice(0, matchUser.index);
-        parts[1] = matchUser[1] + ':' + (data[(matchUser[1] + '_pass').toLowerCase()] || matchUser[2]);
+        parts[1] = matchUser[1] + ':' + (this.data[(matchUser[1] + '_pass').toLowerCase()] || matchUser[2]);
         parts[2] = input.slice(matchUser.index + matchUser[0].length);
         
         // create the output
@@ -59,7 +59,7 @@ clarity.decode = function(input) {
         }
 
         if (matchVariable[1]) {
-            var replacement = data[matchVariable[1]] || transverse(data, matchVariable[1].split('.'));
+            var replacement = this.data[matchVariable[1]] || transverse(this.data, matchVariable[1].split('.'));
         }
         
         // If there is no replacement data use the default
@@ -72,12 +72,12 @@ clarity.decode = function(input) {
     return output;
 };
 
-clarity.deepDecode = function(input) {
+Clarity.prototype.deepDecode = function(input) {
     var clone = {};
     
     // if we have a string, then short circuit
     if (typeof input == 'string' || (input instanceof String)) {
-        return clarity.decode(input);
+        return this.decode(input);
     }
     // likewise if we have a type other than an object
     // then simple return the input
@@ -87,6 +87,7 @@ clarity.deepDecode = function(input) {
     
     // iterate through the keys within the object
     // and return the decoded value
+    var clarity = this;
     Object.keys(input).forEach(function(key) {
         if (hasOwn.call(input, key)) {
             clone[key] = clarity.deepDecode(input[key]);
@@ -96,7 +97,7 @@ clarity.deepDecode = function(input) {
     return clone;
 };
 
-clarity.use = function() {
+Clarity.prototype.use = function() {
     function extend() {
         var dest = {},
             sources = Array.prototype.slice.call(arguments),
@@ -116,10 +117,10 @@ clarity.use = function() {
     }
 
     // update the current data with the supplied sources
-    data = extend.apply(null, [data].concat(Array.prototype.slice.call(arguments)));
+    this.data = extend.apply(null, [this.data].concat(Array.prototype.slice.call(arguments)));
     
     // return clarity
-    return clarity;
+    return this;
 };
 
-module.exports = clarity;
+module.exports = Clarity;

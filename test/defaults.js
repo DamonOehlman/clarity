@@ -1,10 +1,11 @@
 var assert = require('assert'),
-    clarity = require('..'),
+    Clarity = require('..'),
+    clarity,
     testData = {};
 
 describe('default value usage', function() {
     before(function() {
-      clarity.clear();
+      clarity = new Clarity();
       clarity.use(testData);
     });
 
