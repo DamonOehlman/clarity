@@ -111,6 +111,19 @@ the data structure. Such as:
 
 ### Clarity constructor
 
+Create a new instance of clarity.
+
+```js
+var clarity = require('clarity')(process.env);
+```
+
+Which is equivalent to:
+
+```js
+var Clarity = require('clarity');
+var clarity = new Clarity(process.env);
+```
+
 ### Clarity#clear()
 
 Clear the data currently stored within the clarity store
@@ -120,7 +133,10 @@ Clear the data currently stored within the clarity store
 The `deepDecode` method is used to unpack an object and decode each
 of the values within the object into it's actual value.
 
-### Clarity#use()
+### Clarity#use(data*)
+
+Extend the data stored within clarity with additional data that will be
+used at decode time.
 
 ## License(s)
 

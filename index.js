@@ -113,6 +113,19 @@ var hasOwn = Object.prototype.hasOwnProperty;
 /**
   ### Clarity constructor
 
+  Create a new instance of clarity.
+
+  ```js
+  var clarity = require('clarity')(process.env);
+  ```
+
+  Which is equivalent to:
+
+  ```js
+  var Clarity = require('clarity');
+  var clarity = new Clarity(process.env);
+  ```
+
 **/
 function Clarity(data) {
   if (! (this instanceof Clarity)) {
@@ -246,8 +259,11 @@ Clarity.prototype.deepDecode = function(input) {
 };
 
 /**
-  ### Clarity#use()
+  ### Clarity#use(data*)
 
+  Extend the data stored within clarity with additional data that will be
+  used at decode time.
+  
 **/
 Clarity.prototype.use = function() {
   function extend() {
