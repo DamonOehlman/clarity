@@ -30,7 +30,7 @@ clarity.decode = function(input) {
     matchVariable = reObfuscatedVariable.exec(input);
     output = input;
     parts = [];
-        
+
     // if we are dealing with a variable, then decode appropriately
     // for users, we will be looking for the key %username%_pass (yes, lowercase)
     if (matchUser) {
@@ -44,9 +44,8 @@ clarity.decode = function(input) {
     }
     else if (matchVariable) {
         parts[0] = input.slice(0, matchVariable.index);
-        parts[1] = data[matchVariable[1]] || matchVariable[2].slice(1);
+        parts[1] = data[matchVariable[1]] || matchVariable[2] && matchVariable[2].slice(1);
         parts[2] = input.slice(matchVariable.index + matchVariable[0].length);
-        
         output = parts.join('');
     }
     
@@ -66,6 +65,16 @@ clarity.deepDecode = function(input) {
         return input;
     }
     
+    // If input is an array. Then return an array with it's elements deep copied.
+    if (input instanceof Array) {
+        var copyArray = [];
+        input.forEach(function(item) {
+            copyArray.push(clarity.deepDecode(item));
+        });
+
+        return copyArray;
+    }
+
     // iterate through the keys within the object
     // and return the decoded value
     Object.keys(input).forEach(function(key) {
