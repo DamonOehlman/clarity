@@ -1,5 +1,6 @@
 var assert = require('assert'),
-    clarity = require('..'),
+    Clarity = require('..'),
+    clarity,
     testData = {
       'test': 'test',
       'this-is-a-test-key': 'test'
@@ -7,7 +8,7 @@ var assert = require('assert'),
 
 describe('simple key replacement tests', function() {
     before(function() {
-      clarity.clear();
+      clarity = new Clarity();
       clarity.use(testData);
     });
 

@@ -1,9 +1,10 @@
 var assert = require('assert'),
-    clarity = require('..');
+    Clarity = require('..'),
+    clarity;
 
 describe('object value replacement - shallow', function() {
     before(function() {
-      clarity.clear();
+      clarity = new Clarity();
       clarity.use(process.env);
     });
 

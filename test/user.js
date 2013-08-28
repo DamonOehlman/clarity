@@ -1,10 +1,13 @@
 var assert = require('assert'),
-    clarity = require('..'),
+    Clarity = require('..'),
+    clarity,
     obfuscatedUrl = 'http://test:****@damonoehlman.iriscouch.com/clarity-tests',
     decodedUrl = 'http://test:test@damonoehlman.iriscouch.com/clarity-tests';
 
 describe('username replacement tests', function() {
-    before(clarity.clear);
+    before(function() {
+        clarity = new Clarity();
+    });
     
     it('should return the same string when no secret stores have been created', function() {
         assert.equal(clarity.decode(obfuscatedUrl), obfuscatedUrl);

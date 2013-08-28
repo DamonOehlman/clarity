@@ -2,21 +2,24 @@ var assert = require('assert'),
     Clarity = require('..'),
     clarity,
     testData = {
-      'test': 'test',
-      'this-is-a-test-key': 'test'
+      'profile': {
+        'address': {
+          'street': 'test'
+        }
+      }
     };
 
-describe('object value replacement - deep', function() {
+describe('object value replacement - nested data', function() {
     before(function() {
-      clarity = new Clarity();
-      clarity.use(testData);
+        clarity = new Clarity();
+        clarity.use(testData);
     });
 
-    it('should be able to replace a simple key', function() {
+    it('should be able to replace a key from a nested data source', function() {
       var input = {
-        name: '**test**',
+        name: '**profile.address.street**',
         address: {
-          street: '12 **this-is-a-test-key** Street',
+          street: '12 **profile.address.street** Street',
           suburb: 'Brisbane',
           postcode: 4054
         }
