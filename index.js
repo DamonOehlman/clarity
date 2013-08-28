@@ -69,7 +69,7 @@ var hasOwn = Object.prototype.hasOwnProperty;
   machine environment variables to replace the values:
 
   ```js
-  var clarity = require('clarity').use(process.env);
+  var clarity = require('clarity')(process.env);
   var config = clarity.decode(require('./config.json'));
   ```
 
