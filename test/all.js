@@ -1,1 +1,9 @@
+require('./simplekey');
 require('./data-structure-integrity');
+require('./defaults');
+require('./nested-data');
+require('./object-deep');
+require('./object-shallow');
+require('./process-env');
+require('./user');
+require('./userdash');

@@ -1,37 +1,36 @@
-var assert = require('assert'),
-    Clarity = require('..'),
-    clarity,
-    testData = {
-      'profile': {
-        'address': {
-          'street': 'test'
-        }
-      }
-    };
+var test = require('tape');
+var clarity = require('..');
+var config;
+var testData = {
+  profile: {
+    address: {
+      street: 'test'
+    }
+  }
+};
 
-describe('object value replacement - nested data', function() {
-    before(function() {
-        clarity = new Clarity();
-        clarity.use(testData);
-    });
+test('create clarity', function(t) {
+  t.plan(1);
+  t.ok(config = clarity(testData), 'created ok');
+});
 
-    it('should be able to replace a key from a nested data source', function() {
-      var input = {
-        name: '**profile.address.street**',
-        address: {
-          street: '12 **profile.address.street** Street',
-          suburb: 'Brisbane',
-          postcode: 4054
-        }
-      };
-      
-      assert.deepEqual(clarity.decode(input), {
-        name: 'test',
-        address: {
-          street: '12 test Street',
-          suburb: 'Brisbane',
-          postcode: 4054
-        }
-      });
-    });
+test('replace object values - nested', function(t) {
+  var input = {
+    name: '**profile.address.street**',
+    address: {
+      street: '12 **profile.address.street** Street',
+      suburb: 'Brisbane',
+      postcode: 4054
+    }
+  };
+  
+  t.plan(1);
+  t.deepEqual(config.decode(input), {
+    name: 'test',
+    address: {
+      street: '12 test Street',
+      suburb: 'Brisbane',
+      postcode: 4054
+    }
+  });
 });

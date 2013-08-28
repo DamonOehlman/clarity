@@ -1,36 +1,32 @@
-var assert = require('assert'),
-    Clarity = require('..'),
-    clarity;
+var test = require('tape');
+var clarity = require('..');
+var config;
 
-describe('object value replacement - shallow', function() {
-    before(function() {
-      clarity = new Clarity();
-      clarity.use(process.env);
-    });
+test('create clarity', function(t) {
+  t.plan(1);
+  t.ok(config = clarity(process.env), 'created ok');
+});
 
-    it('should be able to replace an common environment variable (USER)', function() {
-      assert.notEqual(clarity.decode('**USER**'), '**USER**');
-    });
+test('replace an common environment variable (USER)', function(t) {
+  t.plan(1);
+  t.notEqual(config.decode('**USER**'), '**USER**');
+});
 
-    it('should be able to replace an environment var within an object', function() {
-      var data = clarity.decode({ username: '**USER** '});
+test('replace an environment var within an object', function(t) {
+  t.plan(1);
+  t.notEqual(config.decode({ username: '**USER**' }).username, '**USER**');
+});
 
-      assert.notEqual(data.username, '**USER**');
-    });
+test('replace an environment var with underscores', function(t) {
+  t.plan(1);
+  t.notEqual(config.decode({ sshAgentPID: '**SSH_AGENT_PID**' }).sshAgentPID, '**SSH_AGENT_PID**');
+});
 
-    it('should be able to replace an environment var with underscores', function() {
-      var data = clarity.decode({ sshAgentPID: '**SSH_AGENT_PID**' });
-
-      assert.notEqual(data.sshAgentPID, '**SSH_AGENT_PID**');
-    });
-
-    it('should be able to replace an environment var deep within an object', function() {
-      var data = clarity.decode({
-        config: {
-          username: '**USER**'
-        }
-      });
-
-      assert.notEqual(data.config.username, '**USER**');
-    });
+test('object value replacement - shallow', function(t) {
+  t.plan(1);
+  t.notEqual(config.decode({
+    config: {
+      username: '**USER**'
+    }
+  }).config.username, '**USER**');
 });
