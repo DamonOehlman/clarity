@@ -1,32 +1,33 @@
-var assert = require('assert'),
-    clarity = require('..'),
-    testData = {
-      name: 'test'
-    };
+var test = require('tape');
+var clarity = require('..');
+var testData = {
+  name: 'test'
+};
+var config;
 
-describe('data integrity', function() {
-    before(function() {
-      clarity.clear();
-      clarity.use(testData);
-    });
+test('initialise data store', function(t) {
+  t.plan(1);
+  config = clarity(testData);
+  t.ok(config, 'created clarity instance');
+});
 
-    it('should preserve arrays', function() {
-      var input = {
-        name: '**name**',
-        animals: [
-          { name: 'Cat' },
-          { name: 'Dog' },
-          { name: 'Lion' }
-        ]
-      };
+test('should preserve arrays', function(t) {
+  var input = {
+    name: '**name**',
+    animals: [
+      { name: 'Cat' },
+      { name: 'Dog' },
+      { name: 'Lion' }
+    ]
+  };
 
-      assert.deepEqual(clarity.decode(input), {
-        name: 'test',
-        animals: [
-          { name: 'Cat' },
-          { name: 'Dog' },
-          { name: 'Lion' }
-        ]
-      });
-    });
+  t.plan(1);
+  t.deepEqual(config.decode(input), {
+    name: 'test',
+    animals: [
+      { name: 'Cat' },
+      { name: 'Dog' },
+      { name: 'Lion' }
+    ]
+  }, 'arrays preserved');
 });

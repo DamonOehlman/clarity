@@ -8,14 +8,10 @@
     "security"
   ],
   "version": "0.1.5",
-  "engines": {
-    "node": ">= 0.6.x < 0.9.0"
-  },
   "dependencies": {
-    "debug": "*"
   },
   "devDependencies": {
-    "mocha": "1.4.x"
+    "tape": "~1.0.4"
   },
   "repository": {
     "type": "git",
