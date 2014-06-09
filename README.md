@@ -17,11 +17,7 @@ stores and will reconcile the information at runtime when required.
 
 [![NPM](https://nodei.co/npm/clarity.png)](https://nodei.co/npm/clarity/)
 
-[![Build Status](https://travis-ci.org/DamonOehlman/clarity.png?branch=master)](https://travis-ci.org/DamonOehlman/clarity)
-[![stable](http://hughsk.github.io/stability-badges/dist/stable.svg)](http://github.com/hughsk/stability-badges)
-
-[![browser support](https://ci.testling.com/DamonOehlman/clarity.png)](https://ci.testling.com/DamonOehlman/clarity)
-
+[![Build Status](https://img.shields.io/travis/DamonOehlman/clarity.svg?branch=master)](https://travis-ci.org/DamonOehlman/clarity) [![stable](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/badges/stability-badges) 
 
 ## Replacing Simple Values
 
@@ -142,7 +138,7 @@ used at decode time.
 
 ### MIT
 
-Copyright (c) 2013 Damon Oehlman <damon.oehlman@gmail.com>
+Copyright (c) 2014 Damon Oehlman <damon.oehlman@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
