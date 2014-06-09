@@ -12,13 +12,6 @@
   "devDependencies": {
     "tape": "^2"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://bitbucket.org/DamonOehlman/clarity.git"
-  },
-  "bugs": {
-    "url": "https://bitbucket.org/DamonOehlman/clarity/issues"
-  },
   "scripts": {
     "test": "node test/all.js",
     "gendocs": "gendocs > README.md"
@@ -27,5 +20,13 @@
   "directories": {
     "test": "test"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DamonOehlman/clarity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DamonOehlman/clarity/issues"
+  },
+  "homepage": "https://github.com/DamonOehlman/clarity"
 }
